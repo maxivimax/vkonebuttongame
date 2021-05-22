@@ -50,14 +50,10 @@
                 document.getElementById('bod').innerHTML = '<div class="your">You Win!</div>';
             }
 
-            if(candy<1){
-                document.getElementById('bod').innerHTML = '<div class="your">Game Over!</div>';
-            }
-
             if(document.getElementById('monster').innerHTML != " "){
                 candy=candy-getRandomInt(10)
                 if(candy<0){
-                    candy = 0
+                    document.getElementById('bod').innerHTML = '<div class="your">Game Over!</div>';
                 } else {
                     document.getElementById('num').innerHTML = candy;
                 }
