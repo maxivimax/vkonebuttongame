@@ -38,7 +38,7 @@
         return Math.floor(Math.random() * max);
         }
 
-        var candy = 998;
+        var candy = 2;
         let timerId = setInterval(() => sec(), 1000);
         let timerId1 = setInterval(() => monster(), 3000);
         
@@ -49,7 +49,11 @@
             if(candy>999){
                 document.getElementById('bod').innerHTML = '<div class="your">You Win!</div>';
             }
-            
+
+            if(candy<1){
+                document.getElementById('bod').innerHTML = '<div class="your">Game Over!</div>';
+            }
+
             if(document.getElementById('monster').innerHTML != " "){
                 candy=candy-getRandomInt(10)
                 if(candy<0){
