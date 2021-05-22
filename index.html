@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Candy</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+        .kick{
+            width: 50vh;
+            height: 50vh;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+            bottom: 0;
+            margin-bottom: 5vh;
+            font-size: xx-large;
+        }
+        .your{
+            position: absolute;
+            left: 50%;
+            margin-top: 1vh;
+            transform: translate(-50%, 0);
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body id="bod">
+    <div class="your">У Вас <span id="num">0</span> конфет</div><br><br><br><br>
+    <div class="monster" id="monster"> </div>
+    <button class="kick" onclick="kick();">УДАРИТЬ</button>
+
+    <script>
+        function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+        }
+
+        var candy = 998;
+        let timerId = setInterval(() => sec(), 1000);
+        let timerId1 = setInterval(() => monster(), 3000);
+        
+        function sec() {
+            candy++
+            document.getElementById('num').innerHTML = candy;
+
+            if(candy>999){
+                document.getElementById('bod').innerHTML = '<div class="your">You Win!</div>';
+            }
+            
+            if(document.getElementById('monster').innerHTML != " "){
+                candy=candy-getRandomInt(10)
+                if(candy<0){
+                    candy = 0
+                } else {
+                    document.getElementById('num').innerHTML = candy;
+                }
+            }
+        }
+
+        function monster() {
+            // getRandomInt(10) == 2
+            if(getRandomInt(10) == 2){
+                document.getElementById('monster').innerHTML = '<div id="hp" class="your"><span id="hp2">██████████</span> <span id="hp3">1000/1000</span></div><br><br><div class="your" id="bodymon">┈┈▕╲╱▔▔▔▔▔╲╱▏┈┈ <br>┈╱╲▏▂▂▂╳╱▔╲▕╱╲┈ <br>┈▏╮▏╲▉╱▏╲▉╱▕╭▕┈ <br>┈╲▂▏╰┈╱┈╲┈╯▕▂╱┈ <br>┈┈┈▏╱╰━━━╯╲▕┈┈┈ <br>╱▔▔▏╭▂▂▂▂▂╮▕▔▔╲ <br>▔╲┈╲▕╱▔▔▔╲▏╱┈╱▔ <br>┈┈▏┈╲▂▂▂▂▂╱┈▕┈┈ </div>';
+                console.log('monster');
+                return;
+            }
+            console.log('no monster');
+        }
+        function kick() {
+            var hpm = document.getElementById('hp3').innerHTML
+            hpm = hpm.slice(0, -5);
+            console.log(hpm);
+
+            hpm = parseInt(hpm);
+
+            if(candy>0){
+                hpm = hpm - candy
+            } else {
+                hpm = hpm - 5
+            }
+
+            document.getElementById('hp3').innerHTML = String(hpm)+"/1000"
+
+            if(hpm < 0){
+                document.getElementById('monster').innerHTML = ' ';
+            }
+        }
+    </script>
+</body>
+</html>
+<!-- ░ -->
